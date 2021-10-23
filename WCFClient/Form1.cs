@@ -103,5 +103,30 @@ namespace WCFClient
                 Log("返回内容：" + result.Substring(0, 10) + "...");
             }
         }
+
+        //测试客户端向服务端传输大集合数据
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<TestData> list = new List<TestData>();
+
+            for (int i = 0; i < 200000; i++)
+            {
+                TestData data = new TestData();
+                data.Code = i.ToString();
+                data.Name = "测试" + i.ToString();
+                list.Add(data);
+            }
+
+            List<TestData> result = PF.Get<ITestService2>().PutBigDataList(list);
+
+            if (result != null)
+            {
+                Log("count=" + result.Count().ToString());
+            }
+            else
+            {
+                Log("返回值result为null");
+            }
+        }
     }
 }

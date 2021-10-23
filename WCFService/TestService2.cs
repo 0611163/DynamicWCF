@@ -29,5 +29,10 @@ namespace WCFService
         {
             return bigData;
         }
+
+        public List<TestData> PutBigDataList(List<TestData> list)
+        {
+            return list;
+        }
     }
 }

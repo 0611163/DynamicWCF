@@ -55,6 +55,12 @@ namespace WCFHost
             ServiceBehaviorAttribute serviceBehaviorAttribute = host.Description.Behaviors.Find<ServiceBehaviorAttribute>();
             serviceBehaviorAttribute.MaxItemsInObjectGraph = 2147483647;
 
+            ServiceThrottlingBehavior serviceThrottlingBehavior = new ServiceThrottlingBehavior();
+            serviceThrottlingBehavior.MaxConcurrentCalls = 2147483647;
+            serviceThrottlingBehavior.MaxConcurrentSessions = 2147483647;
+            serviceThrottlingBehavior.MaxConcurrentInstances = 2147483647;
+            host.Description.Behaviors.Add(serviceThrottlingBehavior);
+
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.MaxBufferSize = 2147483647;
             binding.MaxReceivedMessageSize = 2147483647;

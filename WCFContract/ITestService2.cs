@@ -22,5 +22,11 @@ namespace WCFContract
         /// </summary>
         [OperationContract]
         string PutBigData(string bigData);
+
+        /// <summary>
+        /// 测试客户端向服务端传输大集合数据
+        /// </summary>
+        [OperationContract]
+        List<TestData> PutBigDataList(List<TestData> list);
     }
 }
