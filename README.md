@@ -4,7 +4,25 @@
 动态WCF
 
 #### 软件架构
-软件架构说明
+CS架构
+
+
+#### 引用开源库
+
+1.  Autofac：一个IOC框架
+2.  Castle.core：一个AOP框架
+3.  NLog：日志框架
+
+
+#### 工程说明
+
+1.  WCFClient：客户端
+2.  WCFProxy：客户端WCF动态代理
+3.  Common：通用工程，封装日志和IOC功能
+4.  WCFContract：WCF接口
+5.  WCFModel：实体类
+6.  WCFHost：WCF服务端宿主
+7.  WCF：WCFService服务端实现
 
 
 #### 安装教程
