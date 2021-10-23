@@ -40,14 +40,23 @@ namespace WCFClient
         }
         #endregion
 
+        // 基本测试，以及ref和out参数测试
         private void button1_Click(object sender, EventArgs e)
         {
             int num = 0;
             string msg;
             TestData data = PF.Get<ITestService>().GetData("001", "测试001", ref num, out msg);
-            Log(data.Code + ", " + data.Name + ", " + num.ToString() + ", " + msg);
+            if (data != null)
+            {
+                Log("返回内容：" + data.Code + ", " + data.Name + ", " + num.ToString() + ", " + msg);
+            }
+            else
+            {
+                Log("返回值data为null");
+            }
         }
 
+        // 测试返回大数据量
         private void button2_Click(object sender, EventArgs e)
         {
             List<TestData> list = PF.Get<ITestService2>().GetBigData("001", "测试001");
@@ -57,20 +66,41 @@ namespace WCFClient
             }
             else
             {
-                Log("list为null");
+                Log("返回值list为null");
             }
         }
 
+        // 测试服务端异常
         private void button3_Click(object sender, EventArgs e)
         {
             string result = PF.Get<ITestService>().TestError();
             if (result == null)
             {
-                Log("result为空");
+                Log("返回值result为空");
             }
             else
             {
-                Log(result);
+                Log("返回内容：" + result);
+            }
+        }
+
+        //测试客户端向服务端传输大数据量
+        private void button4_Click(object sender, EventArgs e)
+        {
+            StringBuilder data = new StringBuilder();
+            for (int i = 0; i < 200000; i++)
+            {
+                data.Append("测试" + i);
+            }
+
+            string result = PF.Get<ITestService2>().PutBigData(data.ToString());
+            if (result == null)
+            {
+                Log("返回值result为空");
+            }
+            else
+            {
+                Log("返回内容：" + result.Substring(0, 10) + "...");
             }
         }
     }

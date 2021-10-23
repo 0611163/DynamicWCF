@@ -12,9 +12,15 @@ namespace WCFContract
     public interface ITestService2
     {
         /// <summary>
-        /// 大数据量测试
+        /// 测试返回大数据量
         /// </summary>
         [OperationContract]
         List<TestData> GetBigData(string code, string name);
+
+        /// <summary>
+        /// 测试客户端向服务端传输大数据量
+        /// </summary>
+        [OperationContract]
+        string PutBigData(string bigData);
     }
 }

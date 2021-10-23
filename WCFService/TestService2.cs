@@ -24,5 +24,10 @@ namespace WCFService
 
             return list;
         }
+
+        public string PutBigData(string bigData)
+        {
+            return bigData;
+        }
     }
 }
