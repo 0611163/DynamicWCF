@@ -48,28 +48,28 @@ namespace WCFHost
             MyServiceHostFactory factory = new MyServiceHostFactory();
             ServiceHost host = factory.CreateServiceHost(serviceName, uri);
 
-            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-            smb.HttpGetEnabled = true;
-            host.Description.Behaviors.Add(smb);
+            ServiceMetadataBehavior serviceMetadataBehavior = new ServiceMetadataBehavior();
+            serviceMetadataBehavior.HttpGetEnabled = true;
+            host.Description.Behaviors.Add(serviceMetadataBehavior);
 
-            ServiceBehaviorAttribute sba = host.Description.Behaviors.Find<ServiceBehaviorAttribute>();
-            sba.MaxItemsInObjectGraph = 2147483647;
+            ServiceBehaviorAttribute serviceBehaviorAttribute = host.Description.Behaviors.Find<ServiceBehaviorAttribute>();
+            serviceBehaviorAttribute.MaxItemsInObjectGraph = 2147483647;
 
-            BasicHttpBinding wsHttp = new BasicHttpBinding();
-            wsHttp.MaxBufferPoolSize = 524288;
-            wsHttp.MaxReceivedMessageSize = 2147483647;
-            wsHttp.ReaderQuotas.MaxArrayLength = 6553600;
-            wsHttp.ReaderQuotas.MaxStringContentLength = 2147483647;
-            wsHttp.ReaderQuotas.MaxBytesPerRead = 6553600;
-            wsHttp.ReaderQuotas.MaxDepth = 6553600;
-            wsHttp.ReaderQuotas.MaxNameTableCharCount = 6553600;
-            wsHttp.CloseTimeout = new TimeSpan(0, 1, 0);
-            wsHttp.OpenTimeout = new TimeSpan(0, 1, 0);
-            wsHttp.ReceiveTimeout = new TimeSpan(0, 10, 0);
-            wsHttp.SendTimeout = new TimeSpan(0, 10, 0);
-            wsHttp.Security.Mode = BasicHttpSecurityMode.None;
+            BasicHttpBinding binding = new BasicHttpBinding();
+            binding.MaxBufferSize = 2147483647;
+            binding.MaxReceivedMessageSize = 2147483647;
+            binding.ReaderQuotas.MaxArrayLength = 2147483647;
+            binding.ReaderQuotas.MaxStringContentLength = 2147483647;
+            binding.ReaderQuotas.MaxBytesPerRead = 2147483647;
+            binding.ReaderQuotas.MaxDepth = 2147483647;
+            binding.ReaderQuotas.MaxNameTableCharCount = 2147483647;
+            binding.CloseTimeout = new TimeSpan(0, 1, 0);
+            binding.OpenTimeout = new TimeSpan(0, 1, 0);
+            binding.ReceiveTimeout = new TimeSpan(0, 1, 0);
+            binding.SendTimeout = new TimeSpan(0, 1, 0);
+            binding.Security.Mode = BasicHttpSecurityMode.None;
 
-            host.AddServiceEndpoint(interfaceType, wsHttp, "");
+            host.AddServiceEndpoint(interfaceType, binding, "");
 
             // 把自定义的IEndPointBehavior插入到终结点中
             foreach (var endpont in host.Description.Endpoints)
