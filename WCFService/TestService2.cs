@@ -14,7 +14,7 @@ namespace WCFService
         {
             List<TestData> list = new List<TestData>();
 
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 0; i < 200000; i++)
             {
                 TestData data = new TestData();
                 data.Code = code;

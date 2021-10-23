@@ -2,8 +2,12 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Configuration;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +30,24 @@ namespace WCFProxy
         private static ConcurrentDictionary<Type, object> _objs = new ConcurrentDictionary<Type, object>();
 
         private static ProxyGenerator _proxyGenerator = new ProxyGenerator();
+
+        static PF()
+        {
+            string wcfServiceAddress = ConfigurationManager.AppSettings["WCFServiceAddress"];
+
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            ConfigurationSectionGroup sectionGroup = config.SectionGroups["system.serviceModel"];
+            ServiceModelSectionGroup serviceModelSectionGroup = sectionGroup as ServiceModelSectionGroup;
+            ClientSection clientSection = serviceModelSectionGroup.Client;
+
+            foreach (ChannelEndpointElement endpoint in clientSection.Endpoints)
+            {
+                endpoint.Address = new Uri(Path.Combine(wcfServiceAddress, "Service", endpoint.Name).Replace("\\", "/"));
+            }
+
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("system.serviceModel");
+        }
 
         /// <summary>
         /// 获取WCF服务
