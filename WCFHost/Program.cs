@@ -61,6 +61,12 @@ namespace WCFHost
             serviceThrottlingBehavior.MaxConcurrentInstances = 2147483647;
             host.Description.Behaviors.Add(serviceThrottlingBehavior);
 
+            DataContractSerializerOperationBehavior dataContractBehavior = host.Description.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            if (dataContractBehavior != null)
+            {
+                dataContractBehavior.MaxItemsInObjectGraph = int.MaxValue;
+            }
+
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.MaxBufferSize = 2147483647;
             binding.MaxReceivedMessageSize = 2147483647;
