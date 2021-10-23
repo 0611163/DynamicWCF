@@ -51,7 +51,14 @@ namespace WCFClient
         private void button2_Click(object sender, EventArgs e)
         {
             List<TestData> list = PF.Get<ITestService2>().GetBigData("001", "测试001");
-            Log("count=" + list.Count().ToString());
+            if (list != null)
+            {
+                Log("count=" + list.Count().ToString());
+            }
+            else
+            {
+                Log("list为null");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
