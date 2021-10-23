@@ -21,7 +21,7 @@ namespace WCFContract
         /// 测试服务端异常
         /// </summary>
         [OperationContract]
-        void TestError();
+        string TestError();
     }
 
 }

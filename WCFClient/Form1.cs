@@ -56,7 +56,15 @@ namespace WCFClient
 
         private void button3_Click(object sender, EventArgs e)
         {
-            PF.Get<ITestService>().TestError();
+            string result = PF.Get<ITestService>().TestError();
+            if (result == null)
+            {
+                Log("result为空");
+            }
+            else
+            {
+                Log(result);
+            }
         }
     }
 }

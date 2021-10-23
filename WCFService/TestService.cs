@@ -24,9 +24,11 @@ namespace WCFService
             return data;
         }
 
-        public void TestError()
+        public string TestError()
         {
             throw new Exception("测试异常 " + DateTime.Now.ToString("HH:mm:ss"));
+
+            return "测试返回";
         }
     }
 }

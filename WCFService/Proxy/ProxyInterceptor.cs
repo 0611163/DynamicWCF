@@ -49,6 +49,7 @@ namespace WCFService
             catch (Exception ex)
             {
                 LogUtil.Error(ex.InnerException == null ? ex : ex.InnerException, "ProxyInterceptor " + invocation.Method.DeclaringType.FullName + " " + invocation.Method.Name + " 异常");
+                throw ex.InnerException == null ? ex : ex.InnerException; //把异常扔到客户端
             }
 
             //out和ref参数处理
