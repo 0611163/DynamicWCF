@@ -28,7 +28,13 @@ namespace Common
 
         public static void Error(Exception ex, string message)
         {
-            _log.Error(message + "：" + ex.Message + "\r\n" + ex.StackTrace);
+            _log.Error(message + "：");
+
+            while (ex != null)
+            {
+                _log.Error(ex.Message + "\r\n" + ex.StackTrace);
+                ex = ex.InnerException;
+            }
         }
     }
 }

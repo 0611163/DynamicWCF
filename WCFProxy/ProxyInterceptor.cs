@@ -51,7 +51,7 @@ namespace WCFProxy
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.Error(ex.InnerException == null ? ex : ex.InnerException, "ProxyInterceptor " + typeof(T).Name + " " + invocation.Method.Name + " 异常");
+                    LogUtil.Error(ex, "ProxyInterceptor " + typeof(T).Name + " " + invocation.Method.Name + " 异常");
                     ((IChannel)server).Abort();
                 }
             }
