@@ -20,15 +20,18 @@ CS架构
 ## 工程说明
 
 1.  WCFClient：客户端
-2.  WCFProxy：客户端WCF动态代理
-3.  Common：通用工程，封装日志和IOC功能
-4.  WCFContract：WCF接口
+2.  WCFClientProxy：客户端WCF动态代理
+3.  WCFCommon：通用工程，封装日志和IOC功能
+4.  WCFContract：WCF契约
 5.  WCFModel：实体类
-6.  WCFHost：WCF服务端宿主
-7.  WCF：WCFService服务端实现
+6.  WCFService：WCF服务端实现
+7.  WCFServiceProxy：服务端WCF动态代理
+8.  WCFServiceHost：WCF服务端宿主
 
 
 ## 使用说明
+
+现有程序框架中使用的话，只需要服务端引入WCFServiceProxy.dll和WCFCommon.dll，客户端引入WCFClientProxy.dll和WCFCommon.dll
 
 ### 一、  服务端
 
