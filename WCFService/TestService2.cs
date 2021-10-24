@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using WCFContract;
@@ -8,6 +9,7 @@ using WCFModel;
 
 namespace WCFService
 {
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class TestService2 : ITestService2
     {
         public List<TestData> GetBigData(string code, string name)
