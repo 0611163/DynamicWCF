@@ -28,13 +28,17 @@ namespace WCFCommon
 
         public static void Error(Exception ex, string message)
         {
-            _log.Error(message + "：");
+            StringBuilder msg = new StringBuilder();
+
+            msg.Append(message + "：");
 
             while (ex != null)
             {
-                _log.Error(ex.Message + "\r\n" + ex.StackTrace);
+                msg.Append(ex.Message + "\r\n" + ex.StackTrace + "\r\n");
                 ex = ex.InnerException;
             }
+
+            _log.Error(msg.ToString().TrimEnd());
         }
     }
 }

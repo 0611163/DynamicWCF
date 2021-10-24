@@ -36,20 +36,11 @@ namespace WCFServiceProxy
                 valArr[i] = invocation.GetArgumentValue(i);
             }
 
-            //执行方法
-            try
+            if (true) //token校验
             {
-                if (true) //token校验
-                {
-                    Type implType = _impl.GetType();
-                    MethodInfo methodInfo = implType.GetMethod(invocation.Method.Name);
-                    invocation.ReturnValue = methodInfo.Invoke(_impl, valArr);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogUtil.Error(ex, "ProxyInterceptor " + invocation.Method.DeclaringType.FullName + " " + invocation.Method.Name + " 异常");
-                throw ex; //把异常扔到客户端
+                Type implType = _impl.GetType();
+                MethodInfo methodInfo = implType.GetMethod(invocation.Method.Name);
+                invocation.ReturnValue = methodInfo.Invoke(_impl, valArr);
             }
 
             //out和ref参数处理
