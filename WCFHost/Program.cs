@@ -16,6 +16,14 @@ namespace WCFHost
     {
         static void Main(string[] args)
         {
+            CreateHosts();
+
+            Console.WriteLine("服务成功启动");
+            Console.Read();
+        }
+
+        private static void CreateHosts()
+        {
             string port = ConfigurationManager.AppSettings["ServerPort"];
 
             Assembly assembly = Assembly.Load(Assembly.GetAssembly(typeof(TestService)).FullName);
@@ -34,10 +42,7 @@ namespace WCFHost
                 }
             }
 
-
-
-            Console.WriteLine("服务成功启动");
-            Console.Read();
+            ProxyFactory.Save();
         }
 
         private static void CreateHost(string port, string serviceName, Type interfaceType)
