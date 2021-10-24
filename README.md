@@ -55,7 +55,19 @@ public interface IBaseDataService
 
 说明：为什么要使用RegisterServiceAttribute？是为了兼容旧的WCF服务端和客户端架构，以便改造现有项目，原来的架构不变，为了精简增删改查代码，额外引入该框架。
 
-#### 3.  服务实现类继承IService：
+#### 3.  服务接口添加RegisterServiceAttribute：
+
+```C#
+[RegisterService]
+    public interface IMyTestImp
+```
+
+```C#
+[WCFCommon.RegisterService]
+public interface IBaseDataImp
+```
+
+#### 4.  服务实现类继承IService：
 
 ```C#
 public class BaseDataImp : AbstractService, IBaseDataImp, WCFCommon.IService
@@ -88,7 +100,7 @@ public class MyTestImp : IMyTestImp, WCFCommon.IService
     }
 ```
 
-#### 4.  程序启动时添加如下代码：
+#### 5.  程序启动时添加如下代码：
 
 ```C#
 ThreadUtil.Run(() =>
