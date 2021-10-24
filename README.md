@@ -67,8 +67,6 @@ HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, contractN
 ServiceHelper.StartAllService();
 ```
 
-说明：业务接口程序集implAssembly和WCF服务契约程序集contractAssembly可以是同一个程序集，也可以不是同一个程序集
-
 注意：约定WCF契约接口名称为服务名称前加字母I，例如服务名称为TestService，则WCF契约接口名称为ITestService
 
 ### 二、  客户端
