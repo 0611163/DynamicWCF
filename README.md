@@ -59,7 +59,7 @@ public interface IBaseDataService
 
 ```C#
 [RegisterService]
-    public interface IMyTestImp
+public interface IMyTestImp
 ```
 
 ```C#
