@@ -53,12 +53,12 @@ namespace WCFHost
             host.Description.Behaviors.Add(serviceMetadataBehavior);
 
             ServiceBehaviorAttribute serviceBehaviorAttribute = host.Description.Behaviors.Find<ServiceBehaviorAttribute>();
-            serviceBehaviorAttribute.MaxItemsInObjectGraph = 2147483647;
+            serviceBehaviorAttribute.MaxItemsInObjectGraph = int.MaxValue;
 
             ServiceThrottlingBehavior serviceThrottlingBehavior = new ServiceThrottlingBehavior();
-            serviceThrottlingBehavior.MaxConcurrentCalls = 2147483647;
-            serviceThrottlingBehavior.MaxConcurrentSessions = 2147483647;
-            serviceThrottlingBehavior.MaxConcurrentInstances = 2147483647;
+            serviceThrottlingBehavior.MaxConcurrentCalls = int.MaxValue;
+            serviceThrottlingBehavior.MaxConcurrentSessions = int.MaxValue;
+            serviceThrottlingBehavior.MaxConcurrentInstances = int.MaxValue;
             host.Description.Behaviors.Add(serviceThrottlingBehavior);
 
             DataContractSerializerOperationBehavior dataContractBehavior = host.Description.Behaviors.Find<DataContractSerializerOperationBehavior>();
@@ -68,13 +68,13 @@ namespace WCFHost
             }
 
             BasicHttpBinding binding = new BasicHttpBinding();
-            binding.MaxBufferSize = 2147483647;
-            binding.MaxReceivedMessageSize = 2147483647;
-            binding.ReaderQuotas.MaxArrayLength = 2147483647;
-            binding.ReaderQuotas.MaxStringContentLength = 2147483647;
-            binding.ReaderQuotas.MaxBytesPerRead = 2147483647;
-            binding.ReaderQuotas.MaxDepth = 2147483647;
-            binding.ReaderQuotas.MaxNameTableCharCount = 2147483647;
+            binding.MaxBufferSize = int.MaxValue;
+            binding.MaxReceivedMessageSize = int.MaxValue;
+            binding.ReaderQuotas.MaxArrayLength = int.MaxValue;
+            binding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+            binding.ReaderQuotas.MaxBytesPerRead = int.MaxValue;
+            binding.ReaderQuotas.MaxDepth = int.MaxValue;
+            binding.ReaderQuotas.MaxNameTableCharCount = int.MaxValue;
             binding.CloseTimeout = new TimeSpan(0, 1, 0);
             binding.OpenTimeout = new TimeSpan(0, 1, 0);
             binding.ReceiveTimeout = new TimeSpan(0, 1, 0);
