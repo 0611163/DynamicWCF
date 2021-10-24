@@ -4,10 +4,12 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using WCFCommon;
 using WCFModel;
 
 namespace WCFContract
 {
+    [RegisterService]
     [ServiceContract]
     public interface ITestService2
     {

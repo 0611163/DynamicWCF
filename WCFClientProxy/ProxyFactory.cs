@@ -31,24 +31,6 @@ namespace WCFClientProxy
 
         private static ProxyGenerator _proxyGenerator = new ProxyGenerator();
 
-        static PF()
-        {
-            string wcfServiceAddress = ConfigurationManager.AppSettings["WCFServiceAddress"];
-
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            ConfigurationSectionGroup sectionGroup = config.SectionGroups["system.serviceModel"];
-            ServiceModelSectionGroup serviceModelSectionGroup = sectionGroup as ServiceModelSectionGroup;
-            ClientSection clientSection = serviceModelSectionGroup.Client;
-
-            foreach (ChannelEndpointElement endpoint in clientSection.Endpoints)
-            {
-                endpoint.Address = new Uri(Path.Combine(wcfServiceAddress, "Service", endpoint.Name).Replace("\\", "/"));
-            }
-
-            config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("system.serviceModel");
-        }
-
         /// <summary>
         /// 获取WCF服务
         /// </summary>

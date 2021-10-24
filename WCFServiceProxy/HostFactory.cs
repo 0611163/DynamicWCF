@@ -32,7 +32,7 @@ namespace WCFServiceProxy
                 Type[] interfaceTypes = type.GetInterfaces();
                 foreach (Type interfaceType in interfaceTypes)
                 {
-                    if (interfaceType.GetCustomAttribute<ServiceContractAttribute>() != null)
+                    if (interfaceType.GetCustomAttribute<RegisterServiceAttribute>() != null)
                     {
                         CreateHost(serverPort, type.Name, interfaceType, contractAssembly, implAssembly, contractNamespace, implNamespace);
                         break;

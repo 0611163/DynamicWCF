@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -12,6 +13,11 @@ namespace WCFCommon
     public class ServiceHelper
     {
         private static IContainer _container;
+
+        /// <summary>
+        /// 服务接口集合
+        /// </summary>
+        private static List<Type> _serviceInterfaces = new List<Type>();
 
         /// <summary>
         /// 获取服务
@@ -45,14 +51,10 @@ namespace WCFCommon
                 Type[] interfaceTypes = type.GetInterfaces();
                 foreach (Type interfaceType in interfaceTypes)
                 {
-                    if (interfaceType.GetCustomAttribute<ServiceContractAttribute>() != null)
-                    {
-                        builder.RegisterType(type).AsImplementedInterfaces(); 
-                        break;
-                    }
                     if (interfaceType.GetCustomAttribute<RegisterServiceAttribute>() != null)
                     {
                         builder.RegisterType(type).AsImplementedInterfaces();
+                        _serviceInterfaces.Add(interfaceType);
                         break;
                     }
                 }
@@ -60,6 +62,76 @@ namespace WCFCommon
 
             _container = builder.Build();
         }
+
+        #region 启动所有服务
+        /// <summary>
+        /// 启动所有服务
+        /// </summary>
+        public static Task StartAllService()
+        {
+            return Task.Run(() =>
+            {
+                List<Task> taskList = new List<Task>();
+                foreach (Type t in _serviceInterfaces)
+                {
+                    Task task = Task.Factory.StartNew(obj =>
+                    {
+                        Type _serviceInterfaceType = obj as Type;
+                        IService service = _container.Resolve(_serviceInterfaceType) as IService;
+
+                        try
+                        {
+                            service.OnStart();
+                            LogUtil.Info("服务 " + obj.GetType().FullName + " 已启动");
+                        }
+                        catch (Exception ex)
+                        {
+                            LogUtil.Error(ex, "服务 " + obj.GetType().FullName + " 启动失败");
+                        }
+                    }, t);
+                    taskList.Add(task);
+                }
+                Task.WaitAll(taskList.ToArray());
+            });
+        }
+        #endregion
+
+        #region 停止所有服务
+        /// <summary>
+        /// 停止所有服务
+        /// </summary>
+        public static Task StopAllService()
+        {
+            return Task.Run(() =>
+            {
+                List<Task> taskList = new List<Task>();
+                Type iServiceInterfaceType = typeof(IService);
+                foreach (Type t in _serviceInterfaces)
+                {
+                    Task task = Task.Factory.StartNew(obj =>
+                    {
+                        if (iServiceInterfaceType.IsAssignableFrom(obj.GetType()))
+                        {
+                            Type _serviceInterfaceType = obj as Type;
+                            IService service = _container.Resolve(_serviceInterfaceType) as IService;
+
+                            try
+                            {
+                                service.OnStop();
+                                LogUtil.Info("服务 " + obj.GetType().FullName + " 已停止");
+                            }
+                            catch (Exception ex)
+                            {
+                                LogUtil.Error(ex, "服务 " + obj.GetType().FullName + " 停止失败");
+                            }
+                        }
+                    }, t);
+                    taskList.Add(task);
+                }
+                Task.WaitAll(taskList.ToArray());
+            });
+        }
+        #endregion
 
     }
 }

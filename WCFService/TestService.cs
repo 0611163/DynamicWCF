@@ -11,8 +11,18 @@ using WCFModel;
 namespace WCFService
 {
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-    public class TestService : ITestService
+    public class TestService : ITestService, IService
     {
+        public void OnStart()
+        {
+
+        }
+
+        public void OnStop()
+        {
+
+        }
+
         public TestData GetData(string code, string name, ref int num, out string msg)
         {
             TestData data = new TestData();

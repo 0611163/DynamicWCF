@@ -4,14 +4,25 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using WCFCommon;
 using WCFContract;
 using WCFModel;
 
 namespace WCFService
 {
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-    public class TestService2 : ITestService2
+    public class TestService2 : ITestService2, IService
     {
+        public void OnStart()
+        {
+
+        }
+
+        public void OnStop()
+        {
+
+        }
+
         public List<TestData> GetBigData(string code, string name)
         {
             List<TestData> list = new List<TestData>();
