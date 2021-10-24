@@ -47,6 +47,11 @@ namespace WCFCommon
                 {
                     if (interfaceType.GetCustomAttribute<ServiceContractAttribute>() != null)
                     {
+                        builder.RegisterType(type).AsImplementedInterfaces(); 
+                        break;
+                    }
+                    if (interfaceType.GetCustomAttribute<RegisterServiceAttribute>() != null)
+                    {
                         builder.RegisterType(type).AsImplementedInterfaces();
                         break;
                     }
