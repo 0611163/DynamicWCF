@@ -58,7 +58,7 @@ public interface IBaseDataService
 #### 3.  服务接口添加RegisterServiceAttribute：
 
 ```C#
-[RegisterService]
+[WCFCommon.RegisterService]
 public interface IMyTestImp
 ```
 
