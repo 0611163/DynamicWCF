@@ -40,9 +40,17 @@ CS架构
 #### 2.  服务契约添加RegisterServiceAttribute：
 
 ```C#
-[RegisterService]
-[ServiceContract]
-public interface ITestService
+[WCFCommon.RegisterService]
+[ServiceContract(Namespace = "http://www.suncreate.net/2014/combatplatform", SessionMode = SessionMode.Allowed)]
+[ServiceKnownType("GetKnownTypes", typeof(KnownTypeHelper))]
+public interface IMyTestService
+```
+
+```C#
+[WCFCommon.RegisterService]
+[ServiceContract(Namespace = "http://www.suncreate.net/2014/combatplatform", SessionMode = SessionMode.Allowed)]
+[ServiceKnownType("GetKnownTypes", typeof(KnownTypeHelper))]
+public interface IBaseDataService
 ```
 
 说明：为什么要使用RegisterServiceAttribute？是为了兼容旧的WCF服务端和客户端架构，以便改造现有项目，原来的架构不变，为了精简增删改查代码，额外引入该框架。
@@ -50,23 +58,62 @@ public interface ITestService
 #### 3.  服务实现类继承IService：
 
 ```C#
-public class TestService : ITestService, IService
+public class BaseDataImp : AbstractService, IBaseDataImp, WCFCommon.IService
+{
+    public void OnServiceStart()
+    {
+        m_dbSession = HI.Get<IDBSessionImp>();
+    }
+
+    public void OnServiceStop()
+    {
+        m_dbSession = null;
+    }
+```
+
+```C#
+public class MyTestImp : IMyTestImp, WCFCommon.IService
+{
+    private IDBSessionImp m_dbSession;
+    private static ILog m_Log = log4net.LogManager.GetLogger(typeof(BaseDataImp));
+
+    public void OnServiceStart()
+    {
+        m_dbSession = HI.Get<IDBSessionImp>();
+    }
+
+    public void OnServiceStop()
+    {
+        m_dbSession = null;
+    }
 ```
 
 #### 4.  程序启动时添加如下代码：
 
 ```C#
-int serverPort = int.Parse(ConfigurationManager.AppSettings["ServerPort"]);
-Assembly serviceAssembly = Assembly.GetAssembly(typeof(TestService));
-Assembly contractAssembly = Assembly.GetAssembly(typeof(ITestService));
-Assembly implAssembly = Assembly.GetAssembly(typeof(ITestService));
-string contractNamespace = "WCFContract";
-string implNamespace = "WCFContract";
+ThreadUtil.Run(() =>
+{
+    int serverPort = int.Parse(ConfigurationManager.AppSettings["WCFServerPort"]);
+    Assembly serviceAssembly = Assembly.GetAssembly(typeof(BaseDataImp));
+    Assembly contractAssembly = Assembly.GetAssembly(typeof(IBaseDataService));
+    Assembly implAssembly = Assembly.GetAssembly(typeof(IBaseDataImp));
+    string contractNamespace = "SunCreate.Vipf.Contract";
+    string implNamespace = "SunCreate.Vipf.Server.Bussiness";
 
-HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, implAssembly, contractNamespace, implNamespace);
+    try
+    {
+        HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, implAssembly, contractNamespace, implNamespace);
 
-ServiceHelper.StartAllService();
+        WCFCommon.ServiceHelper.StartAllService();
+    }
+    catch (Exception ex)
+    {
+        string str = ex.Message;
+    }
+});
 ```
+
+说明：这段代码要在StartRepository();之后，即在SP.CreateProvider().Start();之后，也就是要先启动ORM相关的服务
 
 说明：业务接口程序集implAssembly和WCF服务契约程序集contractAssembly可以是同一个程序集，也可以不是同一个程序集
 
@@ -85,7 +132,8 @@ PF.Init(ConfigurationManager.AppSettings["WCFServiceAddress"]); //初始化PF
 #### 3.  使用：
 
 ```C#
-List<TestData> list = PF.Get<ITestService2>().GetBigData("001", "测试001");
+List<VIPF_VIDEO_DEVICE> list = PF.Get<IMyTestService>().GetAllDevice().ToList();
+List<VIPF_VIDEO_DEVICE> list2 = PF.Get<IBaseDataService>().GetAllDevice().ToList();
 ```
 
 
