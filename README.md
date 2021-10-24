@@ -65,6 +65,8 @@ HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, implAssem
 ServiceHelper.StartAllService();
 ```
 
+说明：业务接口程序集implAssembly和WCF服务契约程序集contractAssembly可以是同一个程序集，也可以不是同一个程序集
+
 ### 二、  客户端
 
 #### 1.  引用WCFClientProxy和WCFCommon.dll
