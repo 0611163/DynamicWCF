@@ -18,10 +18,8 @@ namespace WCFServiceProxy
         /// <param name="serverPort">WCF服务端口</param>
         /// <param name="serviceAssembly">WCF服务实现程序集</param>
         /// <param name="contractAssembly">WCF服务契约程序集</param>
-        /// <param name="implAssembly">业务接口程序集，可以和WCF服务契约程序集是同一个程序集，也可以不是同一个程序集</param>
         /// <param name="contractNamespace">WCF服务契约命名空间</param>
-        /// <param name="implNamespace">业务接口命名空间，可以和WCF服务契约命名空间是同一个命名空间，也可以不是同一个命名空间</param>
-        public static void CreateHosts(int serverPort, Assembly serviceAssembly, Assembly contractAssembly, Assembly implAssembly, string contractNamespace, string implNamespace)
+        public static void CreateHosts(int serverPort, Assembly serviceAssembly, Assembly contractAssembly, string contractNamespace)
         {
             ServiceHelper.RegisterAssembly(serviceAssembly); //注册WCF服务程序集
 
@@ -34,7 +32,7 @@ namespace WCFServiceProxy
                 {
                     if (interfaceType.GetCustomAttribute<RegisterServiceAttribute>() != null)
                     {
-                        CreateHost(serverPort, type.Name, interfaceType, contractAssembly, implAssembly, contractNamespace, implNamespace);
+                        CreateHost(serverPort, type.Name, interfaceType, contractAssembly, contractNamespace);
                         break;
                     }
                 }
@@ -43,13 +41,13 @@ namespace WCFServiceProxy
             ProxyFactory.Save();
         }
 
-        private static void CreateHost(int port, string serviceName, Type interfaceType, Assembly contractAssembly, Assembly implAssembly, string contractNamespace, string implNamespace)
+        private static void CreateHost(int port, string serviceName, Type interfaceType, Assembly contractAssembly, string contractNamespace)
         {
             string url = string.Format("http://localhost:{0}/Service/{1}", port, serviceName);
             Uri[] uri = new Uri[] { new Uri(url) };
 
             MyServiceHostFactory factory = new MyServiceHostFactory();
-            ServiceHost host = factory.CreateServiceHost(serviceName, uri, contractAssembly, implAssembly, contractNamespace, implNamespace);
+            ServiceHost host = factory.CreateServiceHost(serviceName, uri, contractAssembly, contractNamespace);
 
             ServiceMetadataBehavior serviceMetadataBehavior = new ServiceMetadataBehavior();
             serviceMetadataBehavior.HttpGetEnabled = true;
