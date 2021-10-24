@@ -42,7 +42,7 @@ CS架构
 public interface ITestService
 ```
 
-说明：为什么要使用RegisterServiceAttribute？是为了兼容旧的WCF服务端和客户端架构，以便可改造现有项目，原来的架构不变，为了精简增删改查代码，额外引入该框架。
+说明：为什么要使用RegisterServiceAttribute？是为了兼容旧的WCF服务端和客户端架构，以便改造现有项目，原来的架构不变，为了精简增删改查代码，额外引入该框架。
 
 #### 3.  服务实现类继承IService：
 
