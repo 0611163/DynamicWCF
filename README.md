@@ -69,6 +69,8 @@ ServiceHelper.StartAllService();
 
 ### 二、  客户端
 
+客户端使用起来非常简单
+
 #### 1.  引用WCFClientProxy和WCFCommon.dll
 
 #### 2.  使用前初始化PF工厂类：
