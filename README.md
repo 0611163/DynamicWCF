@@ -30,13 +30,13 @@ CS架构
 
 1.  服务端：引用WCFServiceProxy.dll和WCFCommon.dll  
 服务契约添加RegisterServiceAttribute：  
-'''  
+```C#  
 [RegisterService]  
 [ServiceContract]  
 public interface ITestService  
-'''  
+```  
 程序启动时添加如下代码：  
-'''  
+```C#  
 int serverPort = int.Parse(ConfigurationManager.AppSettings["ServerPort"]);  
 Assembly serviceAssembly = Assembly.GetAssembly(typeof(TestService));  
 Assembly contractAssembly = Assembly.GetAssembly(typeof(ITestService));  
@@ -47,17 +47,17 @@ string implNamespace = "WCFContract";
 HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, implAssembly, contractNamespace, implNamespace);  
   
 ServiceHelper.StartAllService();  
-'''  
+```  
 
 2.  客户端：引用WCFClientProxy和WCFCommon.dll  
 使用前初始化PF工厂类：  
-'''  
+```C#  
 PF.Init(ConfigurationManager.AppSettings["WCFServiceAddress"]); //初始化PF  
-'''  
+```  
 使用：  
-'''  
+```C#  
 List<TestData> list = PF.Get<ITestService2>().GetBigData("001", "测试001");  
-'''  
+```  
 
 
 
