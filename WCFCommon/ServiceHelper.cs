@@ -84,11 +84,11 @@ namespace WCFCommon
                             try
                             {
                                 service.OnServiceStart();
-                                LogUtil.Info("服务 " + obj.GetType().FullName + " 已启动");
+                                LogUtil.Info("服务 " + _serviceInterfaceType.FullName + " 已启动");
                             }
                             catch (Exception ex)
                             {
-                                LogUtil.Error(ex, "服务 " + obj.GetType().FullName + " 启动失败");
+                                LogUtil.Error(ex, "服务 " + _serviceInterfaceType.FullName + " 启动失败");
                             }
                         }
                     }, t);
@@ -123,11 +123,11 @@ namespace WCFCommon
                                 try
                                 {
                                     service.OnServiceStop();
-                                    LogUtil.Info("服务 " + obj.GetType().FullName + " 已停止");
+                                    LogUtil.Info("服务 " + _serviceInterfaceType.FullName + " 已停止");
                                 }
                                 catch (Exception ex)
                                 {
-                                    LogUtil.Error(ex, "服务 " + obj.GetType().FullName + " 停止失败");
+                                    LogUtil.Error(ex, "服务 " + _serviceInterfaceType.FullName + " 停止失败");
                                 }
                             }
                         }
