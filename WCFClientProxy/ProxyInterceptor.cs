@@ -1,5 +1,5 @@
 ﻿using Castle.DynamicProxy;
-using Common;
+using WCFCommon;
 using System;
 using System.Collections.Generic;
 using System.Linq;

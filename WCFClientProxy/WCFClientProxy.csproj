@@ -55,9 +55,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{E537B581-DC41-437E-8DA9-5D00D9BDEBE6}</Project>
-      <Name>Common</Name>
+    <ProjectReference Include="..\WCFCommon\WCFCommon.csproj">
+      <Project>{e537b581-dc41-437e-8da9-5d00d9bdebe6}</Project>
+      <Name>WCFCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

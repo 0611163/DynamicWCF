@@ -80,13 +80,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{e537b581-dc41-437e-8da9-5d00d9bdebe6}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WCFClientProxy\WCFClientProxy.csproj">
       <Project>{0b874fc4-c504-4e1e-b75c-c5b614d2e573}</Project>
       <Name>WCFClientProxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WCFCommon\WCFCommon.csproj">
+      <Project>{e537b581-dc41-437e-8da9-5d00d9bdebe6}</Project>
+      <Name>WCFCommon</Name>
     </ProjectReference>
     <ProjectReference Include="..\WCFContract\WCFContract.csproj">
       <Project>{c6583275-0d1d-4c2c-8519-19c0f1eeef2d}</Project>

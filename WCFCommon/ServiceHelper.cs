@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common
+namespace WCFCommon
 {
     public class ServiceHelper
     {

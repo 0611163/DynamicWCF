@@ -53,9 +53,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\WCFCommon\WCFCommon.csproj">
       <Project>{e537b581-dc41-437e-8da9-5d00d9bdebe6}</Project>
-      <Name>Common</Name>
+      <Name>WCFCommon</Name>
     </ProjectReference>
     <ProjectReference Include="..\WCFContract\WCFContract.csproj">
       <Project>{c6583275-0d1d-4c2c-8519-19c0f1eeef2d}</Project>

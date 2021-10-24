@@ -1,6 +1,6 @@
 ﻿using Castle.DynamicProxy;
 using Castle.DynamicProxy.Generators;
-using Common;
+using WCFCommon;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

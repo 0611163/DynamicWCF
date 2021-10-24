@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
-using Common;
+using WCFCommon;
 
 namespace WCFServiceProxy
 {
