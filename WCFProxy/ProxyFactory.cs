@@ -60,11 +60,42 @@ namespace WCFProxy
             IInterceptor interceptor = _interceptors.GetOrAdd(interfaceType, type =>
             {
                 string serviceName = interfaceType.Name.Substring(1); //服务名称
-                ChannelFactory<T> channelFactory = new ChannelFactory<T>(serviceName);
+                ChannelFactory<T> channelFactory = CreateChannel<T>(serviceName);
                 return new ProxyInterceptor<T>(channelFactory);
             });
 
             return (T)_objs.GetOrAdd(interfaceType, type => _proxyGenerator.CreateInterfaceProxyWithoutTarget(interfaceType, interceptor)); //根据接口类型动态创建代理对象，接口没有实现类
+        }
+
+        private static ChannelFactory<T> CreateChannel<T>(string serviceName)
+        {
+            string wcfServiceAddress = ConfigurationManager.AppSettings["WCFServiceAddress"];
+            string url = Path.Combine(wcfServiceAddress, "Service", serviceName).Replace("\\", "/");
+
+            BasicHttpBinding binding = new BasicHttpBinding();
+            binding.MaxBufferSize = int.MaxValue;
+            binding.MaxReceivedMessageSize = int.MaxValue;
+            binding.ReaderQuotas.MaxArrayLength = int.MaxValue;
+            binding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+            binding.ReaderQuotas.MaxBytesPerRead = int.MaxValue;
+            binding.ReaderQuotas.MaxDepth = int.MaxValue;
+            binding.ReaderQuotas.MaxNameTableCharCount = int.MaxValue;
+            binding.ReceiveTimeout = new TimeSpan(0, 1, 0);
+            binding.SendTimeout = new TimeSpan(0, 1, 0);
+            binding.Security.Mode = BasicHttpSecurityMode.None;
+
+            ChannelFactory<T> channelFactory = new ChannelFactory<T>(binding, url);
+            foreach (OperationDescription op in channelFactory.Endpoint.Contract.Operations)
+            {
+                DataContractSerializerOperationBehavior dataContractBehavior = op.Behaviors.Find<DataContractSerializerOperationBehavior>() as DataContractSerializerOperationBehavior;
+
+                if (dataContractBehavior != null)
+                {
+                    dataContractBehavior.MaxItemsInObjectGraph = int.MaxValue;
+                }
+            }
+
+            return channelFactory;
         }
     }
 }
