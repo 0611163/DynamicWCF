@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using WCFContract;
 using WCFServiceProxy;
 using WCFService;
+using WCFCommon;
 
 namespace WCFServiceHost
 {
@@ -25,6 +26,8 @@ namespace WCFServiceHost
             string implNamespace = "WCFContract";
 
             HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, implAssembly, contractNamespace, implNamespace);
+
+            ServiceHelper.StartAllService();
 
             Console.WriteLine("服务成功启动");
             Console.Read();
