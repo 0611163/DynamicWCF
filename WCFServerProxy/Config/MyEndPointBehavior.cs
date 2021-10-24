@@ -7,7 +7,7 @@ using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFService
+namespace WCFServerProxy
 {
     public class MyEndPointBehavior : IEndpointBehavior
     {

@@ -34,20 +34,10 @@ namespace Common
         /// <summary>
         /// 注册程序集
         /// </summary>
-        /// <param name="type">程序集中的一个类型</param>
-        public static void RegisterAssembly(Type type)
+        /// <param name="serviceAssembly">服务程序集</param>
+        public static void RegisterAssembly(Assembly serviceAssembly)
         {
-            RegisterAssembly(Assembly.GetAssembly(type).FullName);
-        }
-
-        /// <summary>
-        /// 注册程序集
-        /// </summary>
-        /// <param name="assemblyString">程序集名称的长格式</param>
-        public static void RegisterAssembly(string assemblyString)
-        {
-            Assembly assembly = Assembly.Load(assemblyString);
-            Type[] typeArr = assembly.GetTypes();
+            Type[] typeArr = serviceAssembly.GetTypes();
             ContainerBuilder builder = new ContainerBuilder();
 
             foreach (Type type in typeArr)
