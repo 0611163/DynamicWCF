@@ -30,9 +30,11 @@ CS架构
 
 ## 使用说明
 
-### 一、  服务端：引用WCFServiceProxy.dll和WCFCommon.dll
+### 一、  服务端
 
-#### 1.  服务契约添加RegisterServiceAttribute：
+#### 1.  引用WCFServiceProxy.dll和WCFCommon.dll
+
+#### 2.  服务契约添加RegisterServiceAttribute：
 
 ```C#
 [RegisterService]
@@ -42,13 +44,13 @@ public interface ITestService
 
 说明：为什么要使用RegisterServiceAttribute？是为了兼容旧的WCF服务端和客户端架构，以便可改造现有项目，原来的架构不变，为了精简增删改查代码，额外引入该框架。
 
-#### 2.  服务实现类继承IService：
+#### 3.  服务实现类继承IService：
 
 ```C#
 public class TestService : ITestService, IService
 ```
 
-#### 3.  程序启动时添加如下代码：
+#### 4.  程序启动时添加如下代码：
 
 ```C#
 int serverPort = int.Parse(ConfigurationManager.AppSettings["ServerPort"]);
@@ -63,15 +65,17 @@ HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, implAssem
 ServiceHelper.StartAllService();
 ```
 
-### 二、  客户端：引用WCFClientProxy和WCFCommon.dll
+### 二、  客户端
 
-#### 1.  使用前初始化PF工厂类：
+#### 1.  引用WCFClientProxy和WCFCommon.dll
+
+#### 2.  使用前初始化PF工厂类：
 
 ```C#
 PF.Init(ConfigurationManager.AppSettings["WCFServiceAddress"]); //初始化PF
 ```
 
-#### 2.  使用：
+#### 3.  使用：
 
 ```C#
 List<TestData> list = PF.Get<ITestService2>().GetBigData("001", "测试001");
