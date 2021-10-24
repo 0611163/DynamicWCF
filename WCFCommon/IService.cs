@@ -14,11 +14,11 @@ namespace WCFCommon
         /// <summary>
         /// 服务启动
         /// </summary>
-        void OnStart();
+        void OnServiceStart();
 
         /// <summary>
         /// 服务停止
         /// </summary>
-        void OnStop();
+        void OnServiceStop();
     }
 }

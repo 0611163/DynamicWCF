@@ -61,6 +61,10 @@
       <Project>{c6583275-0d1d-4c2c-8519-19c0f1eeef2d}</Project>
       <Name>WCFContract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WCFServiceInterface\WCFServiceInterface.csproj">
+      <Project>{7875A284-8297-4432-A5D4-7BEB949915F6}</Project>
+      <Name>WCFServiceInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WCFServiceProxy\WCFServiceProxy.csproj">
       <Project>{3e8017a9-2934-423f-9302-7d33686a2cd9}</Project>
       <Name>WCFServiceProxy</Name>

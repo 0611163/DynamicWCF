@@ -7,18 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using WCFContract;
 using WCFModel;
+using WCFServiceInterface;
 
 namespace WCFService
 {
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-    public class TestService : ITestService, IService
+    public class TestImp : ITestImp, IService
     {
-        public void OnStart()
+        public void OnServiceStart()
         {
 
         }
 
-        public void OnStop()
+        public void OnServiceStop()
         {
 
         }

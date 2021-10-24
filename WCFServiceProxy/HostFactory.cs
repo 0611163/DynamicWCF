@@ -45,7 +45,7 @@ namespace WCFServiceProxy
 
         private static void CreateHost(int port, string serviceName, Type interfaceType, Assembly contractAssembly, Assembly implAssembly, string contractNamespace, string implNamespace)
         {
-            string url = string.Format("http://localhost:{0}/Service/{1}", port, serviceName);
+            string url = string.Format("http://localhost:{0}/Service/{1}", port, serviceName.Replace("Imp", "Service"));
             Uri[] uri = new Uri[] { new Uri(url) };
 
             MyServiceHostFactory factory = new MyServiceHostFactory();
@@ -84,7 +84,7 @@ namespace WCFServiceProxy
             binding.SendTimeout = new TimeSpan(0, 1, 0);
             binding.Security.Mode = BasicHttpSecurityMode.None;
 
-            host.AddServiceEndpoint(interfaceType, binding, "");
+            host.AddServiceEndpoint(contractAssembly.GetType(contractNamespace + "." + interfaceType.Name.Replace("Imp", "Service")), binding, "");
 
             // 把自定义的IEndPointBehavior插入到终结点中
             foreach (var endpont in host.Description.Endpoints)

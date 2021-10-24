@@ -11,6 +11,7 @@ using WCFContract;
 using WCFServiceProxy;
 using WCFService;
 using WCFCommon;
+using WCFServiceInterface;
 
 namespace WCFServiceHost
 {
@@ -19,11 +20,11 @@ namespace WCFServiceHost
         static void Main(string[] args)
         {
             int serverPort = int.Parse(ConfigurationManager.AppSettings["ServerPort"]);
-            Assembly serviceAssembly = Assembly.GetAssembly(typeof(TestService));
+            Assembly serviceAssembly = Assembly.GetAssembly(typeof(TestImp));
             Assembly contractAssembly = Assembly.GetAssembly(typeof(ITestService));
-            Assembly implAssembly = Assembly.GetAssembly(typeof(ITestService));
+            Assembly implAssembly = Assembly.GetAssembly(typeof(ITestImp));
             string contractNamespace = "WCFContract";
-            string implNamespace = "WCFContract";
+            string implNamespace = "WCFServiceInterface";
 
             HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, implAssembly, contractNamespace, implNamespace);
 

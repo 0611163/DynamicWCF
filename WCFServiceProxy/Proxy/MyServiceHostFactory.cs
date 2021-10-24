@@ -23,7 +23,7 @@ namespace WCFServiceProxy
         /// <returns></returns>
         public ServiceHost CreateServiceHost(string serviceName, Uri[] baseAddresses, Assembly contractAssembly, Assembly implAssembly, string contractNamespace, string implNamespace)
         {
-            Type contractInterfaceType = contractAssembly.GetType(contractNamespace + ".I" + serviceName);
+            Type contractInterfaceType = contractAssembly.GetType(contractNamespace + ".I" + serviceName.Replace("Imp", "Service"));
             Type implInterfaceType = implAssembly.GetType(implNamespace + ".I" + serviceName);
             if (contractInterfaceType != null && implInterfaceType != null)
             {

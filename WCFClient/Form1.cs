@@ -71,7 +71,7 @@ namespace WCFClient
         {
             Task.Run(() =>
             {
-                List<TestData> list = PF.Get<ITestService2>().GetBigData("001", "测试001");
+                List<TestData> list = PF.Get<ITest2Service>().GetBigData("001", "测试001");
                 if (list != null)
                 {
                     Log("count=" + list.Count().ToString());
@@ -111,7 +111,7 @@ namespace WCFClient
                     data.Append("测试" + i);
                 }
 
-                string result = PF.Get<ITestService2>().PutBigData(data.ToString());
+                string result = PF.Get<ITest2Service>().PutBigData(data.ToString());
                 if (result == null)
                 {
                     Log("返回值result为空");
@@ -138,7 +138,7 @@ namespace WCFClient
                     list.Add(data);
                 }
 
-                List<TestData> result = PF.Get<ITestService2>().PutBigDataList(list);
+                List<TestData> result = PF.Get<ITest2Service>().PutBigDataList(list);
 
                 if (result != null)
                 {

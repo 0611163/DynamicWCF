@@ -83,7 +83,7 @@ namespace WCFCommon
                         {
                             try
                             {
-                                service.OnStart();
+                                service.OnServiceStart();
                                 LogUtil.Info("服务 " + obj.GetType().FullName + " 已启动");
                             }
                             catch (Exception ex)
@@ -122,7 +122,7 @@ namespace WCFCommon
                             {
                                 try
                                 {
-                                    service.OnStop();
+                                    service.OnServiceStop();
                                     LogUtil.Info("服务 " + obj.GetType().FullName + " 已停止");
                                 }
                                 catch (Exception ex)

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AAF8BCC6-70A9-4EE9-A77D-45E89C18093E}</ProjectGuid>
+    <ProjectGuid>{7875A284-8297-4432-A5D4-7BEB949915F6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WCFService</RootNamespace>
-    <AssemblyName>WCFService</AssemblyName>
+    <RootNamespace>WCFServiceInterface</RootNamespace>
+    <AssemblyName>WCFServiceInterface</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Server\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -31,9 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,26 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITestImp.cs" />
+    <Compile Include="ITest2Imp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestImp.cs" />
-    <Compile Include="Test2Imp.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WCFCommon\WCFCommon.csproj">
       <Project>{e537b581-dc41-437e-8da9-5d00d9bdebe6}</Project>
       <Name>WCFCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WCFContract\WCFContract.csproj">
-      <Project>{c6583275-0d1d-4c2c-8519-19c0f1eeef2d}</Project>
-      <Name>WCFContract</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WCFModel\WCFModel.csproj">
-      <Project>{a6e8d581-179c-4171-8d76-107b28b8d983}</Project>
+      <Project>{A6E8D581-179C-4171-8D76-107B28B8D983}</Project>
       <Name>WCFModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WCFServiceInterface\WCFServiceInterface.csproj">
-      <Project>{7875A284-8297-4432-A5D4-7BEB949915F6}</Project>
-      <Name>WCFServiceInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
