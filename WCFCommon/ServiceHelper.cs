@@ -79,14 +79,17 @@ namespace WCFCommon
                         Type _serviceInterfaceType = obj as Type;
                         IService service = _container.Resolve(_serviceInterfaceType) as IService;
 
-                        try
+                        if (service != null)
                         {
-                            service.OnStart();
-                            LogUtil.Info("服务 " + obj.GetType().FullName + " 已启动");
-                        }
-                        catch (Exception ex)
-                        {
-                            LogUtil.Error(ex, "服务 " + obj.GetType().FullName + " 启动失败");
+                            try
+                            {
+                                service.OnStart();
+                                LogUtil.Info("服务 " + obj.GetType().FullName + " 已启动");
+                            }
+                            catch (Exception ex)
+                            {
+                                LogUtil.Error(ex, "服务 " + obj.GetType().FullName + " 启动失败");
+                            }
                         }
                     }, t);
                     taskList.Add(task);
@@ -115,14 +118,17 @@ namespace WCFCommon
                             Type _serviceInterfaceType = obj as Type;
                             IService service = _container.Resolve(_serviceInterfaceType) as IService;
 
-                            try
+                            if (service != null)
                             {
-                                service.OnStop();
-                                LogUtil.Info("服务 " + obj.GetType().FullName + " 已停止");
-                            }
-                            catch (Exception ex)
-                            {
-                                LogUtil.Error(ex, "服务 " + obj.GetType().FullName + " 停止失败");
+                                try
+                                {
+                                    service.OnStop();
+                                    LogUtil.Info("服务 " + obj.GetType().FullName + " 已停止");
+                                }
+                                catch (Exception ex)
+                                {
+                                    LogUtil.Error(ex, "服务 " + obj.GetType().FullName + " 停止失败");
+                                }
                             }
                         }
                     }, t);
