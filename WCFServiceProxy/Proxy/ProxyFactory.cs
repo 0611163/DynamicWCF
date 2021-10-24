@@ -67,11 +67,11 @@ namespace WCFServiceProxy
         /// <summary>
         /// 动态创建代理
         /// </summary>
-        public static object CreateProxy(Type contractInterfaceType, Type impInterfaceType)
+        public static object CreateProxy(Type contractInterfaceType, Type implInterfaceType)
         {
-            IInterceptor interceptor = _interceptors.GetOrAdd(impInterfaceType, type =>
+            IInterceptor interceptor = _interceptors.GetOrAdd(implInterfaceType, type =>
             {
-                object _impl = ServiceHelper.Get(impInterfaceType);
+                object _impl = ServiceHelper.Get(implInterfaceType);
                 return new ProxyInterceptor(_impl);
             });
 
