@@ -1,23 +1,23 @@
 # DynamicWCF
 
-#### 介绍
+## 介绍
 
 动态WCF：使用动态代理精简WCF代码架构
 
 
-#### 软件架构
+## 软件架构
 
 CS架构
 
 
-#### 引用开源库
+## 引用开源库
 
 1.  Autofac：一个IOC框架
 2.  Castle.core：一个AOP框架
 3.  NLog：日志框架
 
 
-#### 工程说明
+## 工程说明
 
 1.  WCFClient：客户端
 2.  WCFProxy：客户端WCF动态代理
@@ -28,11 +28,11 @@ CS架构
 7.  WCF：WCFService服务端实现
 
 
-#### 使用说明
+## 使用说明
 
-1.  服务端：引用WCFServiceProxy.dll和WCFCommon.dll
+### 一、  服务端：引用WCFServiceProxy.dll和WCFCommon.dll
 
-服务契约添加RegisterServiceAttribute：
+#### 1.  服务契约添加RegisterServiceAttribute：
 
 ```C#
 [RegisterService]
@@ -40,7 +40,15 @@ CS架构
 public interface ITestService
 ```
 
-程序启动时添加如下代码：
+说明：为什么要使用RegisterServiceAttribute？是为了兼容旧的WCF服务端和客户端架构，以便可改造现有项目，原来的架构不变，为了精简增删改查代码，额外引入该框架。
+
+#### 2.  服务实现类继承IService：
+
+```C#
+public class TestService : ITestService, IService
+```
+
+#### 3.  程序启动时添加如下代码：
 
 ```C#
 int serverPort = int.Parse(ConfigurationManager.AppSettings["ServerPort"]);
@@ -55,15 +63,15 @@ HostFactory.CreateHosts(serverPort, serviceAssembly, contractAssembly, implAssem
 ServiceHelper.StartAllService();
 ```
 
-2.  客户端：引用WCFClientProxy和WCFCommon.dll
+### 二、  客户端：引用WCFClientProxy和WCFCommon.dll
 
-使用前初始化PF工厂类：
+#### 1.  使用前初始化PF工厂类：
 
 ```C#
 PF.Init(ConfigurationManager.AppSettings["WCFServiceAddress"]); //初始化PF
 ```
 
-使用：
+#### 2.  使用：
 
 ```C#
 List<TestData> list = PF.Get<ITestService2>().GetBigData("001", "测试001");
