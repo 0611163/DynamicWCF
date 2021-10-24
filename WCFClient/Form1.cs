@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -151,6 +152,41 @@ namespace WCFClient
         {
             Task.Run(() =>
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
+                try
+                {
+                    Log("开始");
+
+                    List<Task> taskList = new List<Task>();
+                    int count = 0;
+                    for (int i = 0; i <= 10000; i++)
+                    {
+                        Task task = Task.Factory.StartNew((obj) =>
+                        {
+                            Interlocked.Increment(ref count);
+                            int k = (int)obj;
+                            TestData data = PF.Get<ITestService>().GetData2(k.ToString(), "测试" + k.ToString());
+                            if (count % 100 == 0)
+                            {
+                                Log("已完成：" + count);
+                            }
+                        }, i);
+                        taskList.Add(task);
+                    }
+                    Task.WaitAll(taskList.ToArray());
+
+                    Log("耗时：" + stopwatch.Elapsed.TotalSeconds.ToString("0.000") + " 秒");
+                }
+                catch (Exception ex)
+                {
+                    Log(ex.Message);
+                }
+                finally
+                {
+                    stopwatch.Stop();
+                }
             });
         }
     }

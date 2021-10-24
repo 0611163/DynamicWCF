@@ -18,6 +18,12 @@ namespace WCFContract
         TestData GetData(string code, string name, ref int num, out string msg);
 
         /// <summary>
+        /// 基本测试
+        /// </summary>
+        [OperationContract]
+        TestData GetData2(string code, string name);
+
+        /// <summary>
         /// 测试服务端异常
         /// </summary>
         [OperationContract]

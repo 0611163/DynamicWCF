@@ -24,6 +24,14 @@ namespace WCFService
             return data;
         }
 
+        public TestData GetData2(string code, string name)
+        {
+            TestData data = new TestData();
+            data.Code = code;
+            data.Name = name;
+            return data;
+        }
+
         public string TestError()
         {
             throw new Exception("测试异常 " + DateTime.Now.ToString("HH:mm:ss"));
