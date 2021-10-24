@@ -11,7 +11,7 @@ using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFProxy
+namespace WCFClientProxy
 {
     /// <summary>
     /// WCF服务工厂

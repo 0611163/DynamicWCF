@@ -9,7 +9,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFProxy
+namespace WCFClientProxy
 {
     /// <summary>
     /// 拦截器
