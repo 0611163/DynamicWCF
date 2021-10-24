@@ -12,7 +12,7 @@ using System.ServiceModel.Activation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFServerProxy
+namespace WCFServiceProxy
 {
     /// <summary>
     /// 动态代理工厂

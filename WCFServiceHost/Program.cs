@@ -8,10 +8,10 @@ using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using WCFContract;
-using WCFServerProxy;
+using WCFServiceProxy;
 using WCFService;
 
-namespace WCFHost
+namespace WCFServiceHost
 {
     class Program
     {

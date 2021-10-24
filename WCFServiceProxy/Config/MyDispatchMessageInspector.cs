@@ -8,7 +8,7 @@ using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFServerProxy
+namespace WCFServiceProxy
 {
     /// <summary>
     /// WCF服务端消息拦截器
