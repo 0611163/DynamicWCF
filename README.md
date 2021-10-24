@@ -50,6 +50,7 @@ public interface ITestService
 #### 3.  服务实现类继承IService：
 
 ```C#
+[ServiceBehavior(IncludeExceptionDetailInFaults = true)]
 public class TestService : ITestService, IService
 ```
 
