@@ -7,8 +7,8 @@
     <ProjectGuid>{0B874FC4-C504-4E1E-B75C-C5B614D2E573}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WCFProxy</RootNamespace>
-    <AssemblyName>WCFProxy</AssemblyName>
+    <RootNamespace>WCFClientProxy</RootNamespace>
+    <AssemblyName>WCFClientProxy</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

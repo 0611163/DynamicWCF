@@ -7,8 +7,8 @@
     <ProjectGuid>{3E8017A9-2934-423F-9302-7D33686A2CD9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WCFServerProxy</RootNamespace>
-    <AssemblyName>WCFServerProxy</AssemblyName>
+    <RootNamespace>WCFServiceProxy</RootNamespace>
+    <AssemblyName>WCFServiceProxy</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
