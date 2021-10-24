@@ -16,6 +16,7 @@ namespace WCFClientProxy
     /// <summary>
     /// WCF服务工厂
     /// PF是ProxyFactory的简写
+    /// 使用前请调用PF.Init()初始化
     /// </summary>
     public class PF
     {
@@ -30,6 +31,17 @@ namespace WCFClientProxy
         private static ConcurrentDictionary<Type, object> _objs = new ConcurrentDictionary<Type, object>();
 
         private static ProxyGenerator _proxyGenerator = new ProxyGenerator();
+
+        private static string _wcfServiceAddress;
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="wcfServiceAddress">WCF服务端地址，例：http://127.0.0.1:8068</param>
+        public static void Init(string wcfServiceAddress)
+        {
+            _wcfServiceAddress = wcfServiceAddress;
+        }
 
         /// <summary>
         /// 获取WCF服务
@@ -51,8 +63,7 @@ namespace WCFClientProxy
 
         private static ChannelFactory<T> CreateChannel<T>(string serviceName)
         {
-            string wcfServiceAddress = ConfigurationManager.AppSettings["WCFServiceAddress"];
-            string url = Path.Combine(wcfServiceAddress, "Service", serviceName).Replace("\\", "/");
+            string url = Path.Combine(_wcfServiceAddress, "Service", serviceName).Replace("\\", "/");
 
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.MaxBufferSize = int.MaxValue;

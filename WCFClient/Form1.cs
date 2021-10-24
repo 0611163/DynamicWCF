@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using WCFContract;
 using WCFModel;
 using WCFClientProxy;
+using System.Configuration;
 
 namespace WCFClient
 {
@@ -20,7 +21,10 @@ namespace WCFClient
         public Form1()
         {
             InitializeComponent();
+
             ThreadPool.SetMinThreads(50, 50);
+
+            PF.Init(ConfigurationManager.AppSettings["WCFServiceAddress"]); //初始化PF
         }
 
         #region Log
