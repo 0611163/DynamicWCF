@@ -19,11 +19,11 @@ namespace WCFService
         {
             if (false) //token验证
             {
-                LogUtil.Info("ticket验证失败");
-                throw new Exception("ticket验证失败");
+                //LogUtil.Info("ticket验证失败");
+                //throw new Exception("ticket验证失败");
             }
 
-            LogUtil.Info("token验证通过");
+            //LogUtil.Info("token验证通过");
             return null;
         }
 
